@@ -11,7 +11,6 @@ require_once "includes/db_connect.php";
     <link rel="stylesheet" href="assets/css/style.css">
 
     <style>
-        /* Simple navbar styling */
         .navbar {
             background: #222;
             padding: 15px;
@@ -29,11 +28,45 @@ require_once "includes/db_connect.php";
         .navbar-right a:last-child {
             margin-right: 0;
         }
+
+        /* Search bar styling */
+        .search-bar {
+            background: #fff;
+            padding: 20px;
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+            box-shadow: 0 0 4px rgba(0,0,0,0.2);
+        }
+
+        .search-bar input,
+        .search-bar select {
+            padding: 10px;
+            font-size: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 200px;
+        }
+
+        .search-bar button {
+            padding: 10px 20px;
+            background: #222;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .search-bar button:hover {
+            background: #444;
+        }
     </style>
 </head>
+
 <body>
 
-<!-- 🔥 NAVBAR ADDED HERE -->
 <div class="navbar">
 
     <div class="navbar-left">
@@ -56,7 +89,6 @@ require_once "includes/db_connect.php";
         <?php endif; ?>
     </div>
 </div>
-<!-- END NAVBAR -->
 
 <header>
     <h1>PartsLo.pk</h1>
@@ -90,7 +122,6 @@ require_once "includes/db_connect.php";
 </section>
 
 <section id="productList" class="product-grid">
-    <!-- Products will be loaded dynamically here -->
 </section>
 
 <script src="assets/js/main.js"></script>

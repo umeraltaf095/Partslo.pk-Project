@@ -73,7 +73,7 @@ $user = current_user($pdo);
         <a href="/partslo/index.php">Home</a>
         <a href="/partslo/cart/cart.php">Cart</a>
         <a href="/partslo/orders/my_orders.php">My Orders</a>
-        <a href="/partslo/user/dashboard.php">Dashboard</a>
+       
         <a href="/partslo/user/logout.php">Logout</a>
     </div>
 </div>

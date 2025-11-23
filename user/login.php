@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once "../includes/db_connect.php";
 require_once "../includes/auth.php";
 
@@ -12,25 +13,76 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($user && password_verify($password, $user['password'])) {
-        // set session
+
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['user_name'] = $user['name'];
-        header('Location: /partslo/index.php');   // <--- REDIRECT UPDATED
+
+        header('Location: /partslo/index.php');   
         exit;
+
     } else {
         $message = "Invalid email or password.";
     }
 }
 ?>
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>Login - PartsLo</title>
-  <link rel="stylesheet" href="../assets/css/auth.css">
+<meta charset="UTF-8">
+<title>Login - PartsLo.pk</title>
+<link rel="stylesheet" href="../assets/css/auth.css">
+
+<style>
+    /* SAME NAVBAR STYLE AS index.php */
+    .navbar {
+        background: #222;
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+    }
+    .navbar a {
+        color: white;
+        margin-right: 15px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    .navbar-right a:last-child {
+        margin-right: 0;
+    }
+
+    /* Page title like index.php header */
+    .page-title {
+        text-align: center;
+        margin-top: 25px;
+        font-size: 32px;
+        font-weight: bold;
+        color: #222;
+    }
+</style>
 </head>
+
 <body>
+
+<!-- SAME NAVBAR AS OTHER PAGES -->
+<div class="navbar">
+
+    <div class="navbar-left">
+        <a href="/partslo/index.php">🏠 Home</a>
+    </div>
+
+    <div class="navbar-right">
+       
+      
+        <a href="/partslo/admin/admin_login.php" style="color:#80bfff;">Admin Login</a>
+    </div>
+</div>
+
+<h1 class="page-title">PartsLo.pk</h1>
+
 <div class="auth-container">
+
   <h2>Login</h2>
 
   <?php if ($message): ?>
@@ -44,6 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <?php endif; ?>
 
   <form method="post">
+
     <label>Email</label>
     <input type="email" name="email" required>
 
@@ -52,8 +105,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <button type="submit">Login</button>
 
-    <p class="link">Don't have account? <a href="register.php">Register</a></p>
+    <p class="link">Don't have an account? <a href="register.php">Register</a></p>
   </form>
 </div>
+
 </body>
 </html>

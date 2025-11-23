@@ -7,22 +7,28 @@ function loadProducts(category = '', keyword = '', min = 0, max = 999999) {
     .then(data => {
         const container = document.getElementById("productList");
         container.innerHTML = '';
-        if(data.length === 0){
+
+        if (data.length === 0) {
             container.innerHTML = '<p>No products found.</p>';
             return;
         }
+
         data.forEach(p => {
             container.innerHTML += `
-            <div class="product-card">
-                <img src="/partslo/assets/images/${p.image}" alt="${p.name}" style="height:200px;">
+            <div class="product-item">
+                <div class="product-image">
+                    <img src="/partslo/assets/images/${p.image}" alt="${p.name}">
+                </div>
 
-                <div class="product-title">${p.name}</div>
-                <div class="product-category">${p.category_name}</div>
-                <div class="product-price">Rs ${p.price}</div>
-                <button class="view-btn" onclick="viewProduct(${p.id})">View Details</button>
+                <div class="product-info">
+                    <h3>${p.name}</h3>
+                    <p class="price">Rs ${p.price}</p>
+                    <button onclick="viewProduct(${p.id})" class="view-btn">View Details</button>
+                </div>
             </div>`;
         });
-    }).catch(err => console.error("Error loading products:", err));
+    })
+    .catch(err => console.error("Error loading products:", err));
 }
 
 // Initial load

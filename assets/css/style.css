@@ -1,6 +1,3 @@
-/* ===========================
-   GENERAL STYLES
-=========================== */
 body {
     margin: 0;
     padding: 0;
@@ -19,40 +16,7 @@ header h1 {
     margin: 0;
 }
 
-/* ===========================
-   FILTER BAR
-=========================== */
-.filters {
-    background: white;
-    padding: 15px;
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    flex-wrap: wrap;
-    box-shadow: 0 0 3px rgba(0,0,0,0.2);
-}
-
-.filters input,
-.filters select,
-.filters button {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-.filters button {
-    background: #222;
-    color: white;
-    cursor: pointer;
-}
-
-.filters button:hover {
-    background: #555;
-}
-
-/* ===========================
-   CATEGORY BOXES
-=========================== */
+/* Category boxes */
 .categories {
     display: flex;
     justify-content: center;
@@ -74,59 +38,66 @@ header h1 {
     background: #444;
 }
 
-/* ===========================
-   PRODUCT CARD GRID
-=========================== */
-.product-list {
+/* =======================
+   PRODUCT GRID (DARAZ STYLE)
+======================= */
+#productList {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 20px;
     padding: 20px;
 }
 
-.product-card {
+.product-item {
     background: white;
-    padding: 15px;
     border-radius: 10px;
-    box-shadow: 0 0 4px rgba(0,0,0,0.2);
+    box-shadow: 0 0 6px rgba(0,0,0,0.2);
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.product-item:hover {
+    transform: translateY(-5px);
+}
+
+.product-image img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.product-info {
+    padding: 12px;
     text-align: center;
 }
 
-.product-card img {
-    width: 100%;
-    height: 140px;
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-.product-title {
-    font-weight: bold;
+.product-info h3 {
+    font-size: 16px;
     margin: 10px 0;
 }
 
-.product-price {
-    color: green;
+.price {
+    color: orange;
     font-size: 18px;
+    font-weight: bold;
     margin-bottom: 10px;
 }
 
 .view-btn {
-    padding: 8px 15px;
     background: #222;
     color: white;
     border: none;
-    border-radius: 5px;
+    padding: 8px 15px;
+    border-radius: 6px;
     cursor: pointer;
+    width: 100%;
 }
 
 .view-btn:hover {
-    background: #555;
+    background: #444;
 }
 
-/* ===========================
-   RESPONSIVE
-=========================== */
+/* Responsive */
 @media(max-width: 600px){
-    .filters { flex-direction: column; }
     .cat-box { width: 100%; text-align: center; }
 }

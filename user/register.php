@@ -1,4 +1,5 @@
 <?php 
+session_start();
 require_once "../includes/db_connect.php";  
 $message = "";  
 
@@ -11,17 +12,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password_raw = $_POST["password"] ?? "";
     $password = password_hash($password_raw, PASSWORD_DEFAULT);
 
-    // Run validation only if email is not empty
     if (!empty($email)) {
 
-        // Check email already exists
         $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
         $stmt->execute([$email]);
 
         if ($stmt->rowCount() > 0) {
             $message = "Email already registered!";
         } else {
-            $stmt = $pdo->prepare("INSERT INTO users (name, email, password, phone, address) VALUES (?, ?, ?, ?, ?)");
+            $stmt = $pdo->prepare("INSERT INTO users (name, email, password, phone, address) 
+                                   VALUES (?, ?, ?, ?, ?)");
 
             if ($stmt->execute([$name, $email, $password, $phone, $address])) {
                 header("Location: login.php?registered=1");
@@ -35,18 +35,66 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>User Registration</title>
+    <meta charset="UTF-8">
+    <title>User Registration - PartsLo.pk</title>
     <link rel="stylesheet" href="../assets/css/auth.css">
+
+    <style>
+        /* SAME NAVBAR STYLE AS index.php */
+        .navbar {
+            background: #222;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+        .navbar a {
+            color: white;
+            margin-right: 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .navbar-right a:last-child {
+            margin-right: 0;
+        }
+
+        /* Store title styling */
+        .page-title {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 32px;
+            font-weight: bold;
+            color: #222;
+        }
+    </style>
 </head>
 <body>
+
+<!-- SAME NAVBAR AS LOGIN + INDEX -->
+<div class="navbar">
+
+    <div class="navbar-left">
+        <a href="/partslo/index.php">🏠 Home</a>
+    </div>
+
+    <div class="navbar-right">
+       
+        
+        <a href="/partslo/admin/admin_login.php" style="color:#80bfff;">Admin Login</a>
+    </div>
+
+</div>
+
+<h1 class="page-title">PartsLo.pk</h1>
 
 <div class="auth-container">
     <h2>Create Account</h2>
 
     <?php if (!empty($message)) : ?>
-        <p class="msg"><?= $message ?></p>
+        <p class="msg"><?= htmlspecialchars($message) ?></p>
     <?php endif; ?>
 
     <form method="POST">
