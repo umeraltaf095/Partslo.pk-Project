@@ -198,6 +198,109 @@ label { font-weight:600; display:block; margin-top:8px; }
     .modal-row { flex-direction:column; }
     th, td { font-size:13px; }
 }
+/* ============================
+   MODAL IMPROVED STYLING
+   ============================ */
+
+.modal-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.55);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+/* Modal Box Styling */
+.modal-box {
+    width: 600px;
+    max-width: 95%;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
+    animation: fadeIn 0.25s ease-out;
+    border-top: 5px solid #2c3e50; /* Same as your store theme dark-blue */
+}
+
+/* Modal Heading */
+.modal-box h3 {
+    margin-bottom: 20px;
+    font-size: 22px;
+    color: #2c3e50;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+}
+
+/* Row & Columns */
+.modal-row {
+    display: flex;
+    gap: 25px;
+}
+
+.modal-col {
+    flex: 1;
+}
+
+/* Labels */
+.modal-col label {
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+    color: #2c3e50;
+}
+
+/* Inputs */
+.modal-col input,
+.modal-col textarea,
+.modal-col select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    margin-top: 5px;
+    font-size: 15px;
+}
+
+/* Buttons */
+.modal-box .button {
+    background-color: #2c3e50;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.modal-box .button:hover {
+    background-color: #3a4a5a;
+}
+
+.modal-box .danger {
+    background-color: #e74c3c;
+}
+
+.modal-box .danger:hover {
+    background-color: #c0392b;
+}
+
+/* Small text */
+.small {
+    font-size: 12px;
+    color: #666;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
 </style>
 
 <script>
