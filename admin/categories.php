@@ -56,6 +56,28 @@ $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <title>Manage Categories</title>
 <link rel="stylesheet" href="../assets/css/style.css">
 <style>
+    .top-bar {
+            background: #111;
+            padding: 12px 20px;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .top-bar .store-name {
+            font-size: 22px;
+            font-weight: bold;
+            color: #00c3ff;
+        }
+        .top-bar a {
+            color: #fff;
+            margin-left: 20px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .top-bar a:hover {
+            text-decoration: underline;
+        }
 .table-box {
     width: 90%;
     margin: 30px auto;
@@ -134,8 +156,19 @@ function deleteCategory(id) {
 
 </head>
 <body>
+    <div class="top-bar">
+    <div class="store-name">PartsLo.pk</div>
 
-<h1 style="text-align:center;">Manage Categories</h1>
+    <div class="links">
+        Welcome, <?= htmlspecialchars($_SESSION['admin_name']) ?>
+        <a href="/partslo/admin/logout.php">Logout</a>
+    </div>
+</div>
+
+
+<header>
+    <h1 style="text-align:center; margin-top:20px;">Manage Categories</h1>
+</header>
 
 <div class="table-box">
     <button class="button" onclick="openAddModal()">+ Add Category</button>

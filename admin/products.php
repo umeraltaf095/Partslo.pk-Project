@@ -389,6 +389,9 @@ function onEditCategoryChange() {
         <a href="/partslo/user/logout.php">Logout</a>
     </div>
 </div>
+<header>
+    <h1 style="text-align:center; margin-top:20px;">Manage Products</h1>
+</header>
 
 <div class="container">
     <div class="table-box">
