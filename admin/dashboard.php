@@ -84,6 +84,7 @@ require_once "admin_auth.php";
 
     <div class="links">
         Welcome, <?= htmlspecialchars($_SESSION['admin_name']) ?>
+          <a href="/partslo/index.php">Home</a>
         <a href="/partslo/admin/logout.php">Logout</a>
     </div>
 </div>

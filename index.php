@@ -74,19 +74,30 @@ require_once "includes/db_connect.php";
     </div>
 
     <div class="navbar-right">
-        <?php if(isset($_SESSION['user_id'])): ?>
+
+        <!-- ✅ If admin is logged in -->
+        <?php if(isset($_SESSION['admin_id'])): ?>
+            
+            <span>👨‍💼 Admin: <?= htmlspecialchars($_SESSION['admin_name']) ?></span>
+            <a href="/partslo/admin/dashboard.php">Admin Dashboard</a>
+            <a href="/partslo/admin/logout.php" style="color:#ff8080;">Logout</a>
+
+        <!-- ✅ If normal user is logged in -->
+        <?php elseif(isset($_SESSION['user_id'])): ?>
             
             <span>👋 Welcome, <?= htmlspecialchars($_SESSION['user_name']) ?></span>
             <a href="/partslo/user/dashboard.php">Dashboard</a>
             <a href="/partslo/orders/my_orders.php">My Orders</a>
             <a href="/partslo/user/logout.php" style="color:#ff8080;">Logout</a>
 
+        <!-- ❌ If no one is logged in -->
         <?php else: ?>
 
             <a href="/partslo/user/login.php">Login</a>
             <a href="/partslo/user/register.php">Register</a>
 
         <?php endif; ?>
+
     </div>
 </div>
 
@@ -121,9 +132,9 @@ require_once "includes/db_connect.php";
     ?>
 </section>
 
-<section id="productList" class="product-grid">
-</section>
+<section id="productList" class="product-grid"></section>
 
 <script src="assets/js/main.js"></script>
+
 </body>
 </html>

@@ -161,7 +161,10 @@ function deleteCategory(id) {
 
     <div class="links">
         Welcome, <?= htmlspecialchars($_SESSION['admin_name']) ?>
-        <a href="/partslo/admin/logout.php">Logout</a>
+        
+        <a href="/partslo/index.php">Home</a>
+        <a href="/partslo/admin/dashboard.php">Dashboard</a>
+        <a href="/partslo/user/logout.php">Logout</a>
     </div>
 </div>
 
