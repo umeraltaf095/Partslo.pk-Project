@@ -10,8 +10,7 @@ $max      = $_GET['max'] ?? 999999;
 $sql = "SELECT p.*, c.name AS category_name, c.slug AS category_slug 
         FROM products p
         JOIN categories c ON p.category_id = c.id
-        WHERE p.is_active = 1               -- ✅ (LINE ADDED)
-        AND p.price BETWEEN ? AND ?";
+        WHERE p.price BETWEEN ? AND ?";
 
 $params = [$min, $max];
 

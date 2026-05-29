@@ -93,33 +93,11 @@ require_once "includes/db_connect.php";
         </div>
     </div>
 
-<<<<<<< HEAD
     <header>
         <h1>PartsLo.pk</h1>
 
         <div class="search-bar">
             <input type="text" id="searchInput" placeholder="Search products...">
-=======
-    <div class="navbar-right">
-
-        <!-- ✅ If admin is logged in -->
-        <?php if(isset($_SESSION['admin_id'])): ?>
-            
-            <span>👨‍💼 Admin: <?= htmlspecialchars($_SESSION['admin_name']) ?></span>
-            <a href="/partslo/admin/dashboard.php">Admin Dashboard</a>
-            <a href="/partslo/admin/logout.php" style="color:#ff8080;">Logout</a>
-
-        <!-- ✅ If normal user is logged in -->
-        <?php elseif(isset($_SESSION['user_id'])): ?>
-            
-            <span>👋 Welcome, <?= htmlspecialchars($_SESSION['user_name']) ?></span>
-            <a href="/partslo/user/dashboard.php">Dashboard</a>
-            <a href="/partslo/orders/my_orders.php">My Orders</a>
-            <a href="/partslo/user/logout.php" style="color:#ff8080;">Logout</a>
-
-        <!-- ❌ If no one is logged in -->
-        <?php else: ?>
->>>>>>> c8fb64247b165071eb4eb25e0e071a761c67454f
 
             <select id="categoryFilter">
                 <option value="">All Categories</option>
@@ -131,15 +109,8 @@ require_once "includes/db_connect.php";
                 ?>
             </select>
 
-<<<<<<< HEAD
             <input type="number" id="minPrice" placeholder="Min Price">
             <input type="number" id="maxPrice" placeholder="Max Price">
-=======
-        <?php endif; ?>
-
-    </div>
-</div>
->>>>>>> c8fb64247b165071eb4eb25e0e071a761c67454f
 
             <button id="searchBtn">Search</button>
         </div>
@@ -156,29 +127,7 @@ require_once "includes/db_connect.php";
     <section id="productList" class="product-grid">
     </section>
 
-<<<<<<< HEAD
     <script src="assets/js/main.js"></script>
-=======
-        <input type="number" id="minPrice" placeholder="Min Price">
-        <input type="number" id="maxPrice" placeholder="Max Price">
-
-        <button id="searchBtn">Search</button>
-    </div>
-</header>
-
-<section class="categories">
-    <?php
-    foreach($cats as $cat){
-        echo '<div class="cat-box" data-cat="'.$cat['slug'].'">'.$cat['name'].'</div>';
-    }
-    ?>
-</section>
-
-<section id="productList" class="product-grid"></section>
-
-<script src="assets/js/main.js"></script>
-
->>>>>>> c8fb64247b165071eb4eb25e0e071a761c67454f
 </body>
 
 </html>
