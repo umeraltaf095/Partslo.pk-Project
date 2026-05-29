@@ -3,18 +3,18 @@
 // ===============================
 function loadProducts(category = '', keyword = '', min = 0, max = 999999) {
     fetch(`tools/get_products.php?category=${category}&keyword=${keyword}&min=${min}&max=${max}`)
-    .then(res => res.json())
-    .then(data => {
-        const container = document.getElementById("productList");
-        container.innerHTML = '';
+        .then(res => res.json())
+        .then(data => {
+            const container = document.getElementById("productList");
+            container.innerHTML = '';
 
-        if (data.length === 0) {
-            container.innerHTML = '<p>No products found.</p>';
-            return;
-        }
+            if (data.length === 0) {
+                container.innerHTML = '<p>No products found.</p>';
+                return;
+            }
 
-        data.forEach(p => {
-            container.innerHTML += `
+            data.forEach(p => {
+                container.innerHTML += `
             <div class="product-item">
                 <div class="product-image">
                     <img src="/partslo/assets/images/${p.image}" alt="${p.name}">
@@ -26,9 +26,9 @@ function loadProducts(category = '', keyword = '', min = 0, max = 999999) {
                     <button onclick="viewProduct(${p.id})" class="view-btn">View Details</button>
                 </div>
             </div>`;
-        });
-    })
-    .catch(err => console.error("Error loading products:", err));
+            });
+        })
+        .catch(err => console.error("Error loading products:", err));
 }
 
 // Initial load
@@ -59,6 +59,12 @@ document.getElementById("searchBtn").addEventListener("click", () => {
 // ===============================
 // VIEW PRODUCT
 // ===============================
-function viewProduct(id){
+function viewProduct(id) {
     window.location.href = `product/view.php?id=${id}`;
 }
+
+
+// ===============================
+// INITIAL LOAD
+// ===============================
+loadProducts();

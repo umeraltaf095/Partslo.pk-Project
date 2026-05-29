@@ -15,13 +15,13 @@ $sql = "SELECT p.*, c.name AS category_name, c.slug AS category_slug
 $params = [$min, $max];
 
 // Filter by category slug if provided
-if($category !== ''){
+if ($category !== '') {
     $sql .= " AND c.slug = ?";
     $params[] = $category;
 }
 
 // Filter by keyword
-if($keyword !== ''){
+if ($keyword !== '') {
     $sql .= " AND p.name LIKE ?";
     $params[] = "%$keyword%";
 }

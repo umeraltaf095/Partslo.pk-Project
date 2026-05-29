@@ -138,169 +138,120 @@ $subcategories = $subStmt->fetchAll(PDO::FETCH_ASSOC);
 <title>Admin - Manage Products</title>
 <link rel="stylesheet" href="../assets/css/style.css">
 
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* top bar */
-.top-bar {
-    background: #111;
-    color: #fff;
-    padding: 12px 20px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-.top-bar a { color: #fff; text-decoration:none; margin-left:12px; }
-.top-bar .store-name { color:#00c3ff; font-weight:bold; font-size:18px; }
+    :root {
+        --primary: #4b134f;
+        --secondary: #c94b4b;
+        --bg-color: #f8fafc;
+        --text-dark: #334155;
+        --text-muted: #64748b;
+        --card-bg: #ffffff;
+        --border-color: #e2e8f0;
+    }
 
-/* container */
-.container { max-width:1100px; margin:28px auto; }
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Inter', sans-serif;
+        background-color: var(--bg-color);
+        color: var(--text-dark);
+    }
 
-/* card */
-.table-box {
-    width:100%;
-    background:#fff;
-    padding:18px;
-    border-radius:8px;
-    box-shadow:0 0 12px rgba(0,0,0,0.12);
-}
+    /* Navbar */
+    .navbar {
+        background: #1e293b;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
 
-/* table */
-table { width:100%; border-collapse:collapse; table-layout:fixed; }
-th, td { padding:10px 12px; border-bottom:1px solid #eee; text-align:left; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; }
-th:nth-child(1), td:nth-child(1) { width:6%; }
-th:nth-child(2), td:nth-child(2) { width:22%; } /* name */
-th:nth-child(3), td:nth-child(3) { width:12%; } /* category */
-th:nth-child(4), td:nth-child(4) { width:12%; } /* subcat */
-th:nth-child(5), td:nth-child(5) { width:10%; } /* price */
-th:nth-child(6), td:nth-child(6) { width:8%; }  /* stock */
-th:nth-child(7), td:nth-child(7) { width:12%; } /* image */
-th:nth-child(8), td:nth-child(8) { width:18%; } /* actions */
+    .navbar .brand {
+        font-size: 24px;
+        font-weight: 700;
+        color: #fff;
+        text-decoration: none;
+        letter-spacing: 1px;
+    }
 
-.img-thumb { height:50px; border-radius:4px; object-fit:cover; }
+    .navbar .nav-links a {
+        padding: 8px 16px;
+        background: rgba(255,255,255,0.1);
+        border-radius: 6px;
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 14px;
+        transition: background 0.3s;
+        margin-left: 10px;
+    }
 
-/* buttons */
-.button { padding:8px 12px; background:#111; color:#fff; border-radius:6px; text-decoration:none; cursor:pointer; display:inline-block; margin-right:6px; }
-.button.secondary { background:#00aaff; }
-.button.danger { background:#d00000; }
+    .navbar .nav-links a:hover {
+        background: rgba(255,255,255,0.2);
+    }
 
-/* modals */
-.modal-bg { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.55); display:none; justify-content:center; align-items:center; z-index:999; }
-.modal-box { width:680px; max-width:95%; background:#fff; padding:18px; border-radius:8px; box-shadow:0 8px 30px rgba(0,0,0,0.2); }
-.modal-row { display:flex; gap:12px; }
-.modal-col { flex:1; }
-input[type="text"], input[type="number"], input[type="file"], textarea, select {
-    width:100%; padding:10px; border:1px solid #ccc; border-radius:6px; font-size:14px;
-}
-label { font-weight:600; display:block; margin-top:8px; }
-.small { font-size:13px; color:#666; }
+    /* container */
+    .container { max-width:1300px; margin:40px auto; padding: 0 20px; }
 
-/* responsive */
-@media (max-width:880px){
-    .modal-row { flex-direction:column; }
-    th, td { font-size:13px; }
-}
-/* ============================
-   MODAL IMPROVED STYLING
-   ============================ */
+    .page-header { margin-bottom: 25px; display: flex; justify-content: space-between; align-items: center; }
+    .page-header h1 { font-size: 30px; margin: 0; color: #0f172a; }
 
-.modal-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.55);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-}
+    /* card */
+    .table-box {
+        width:100%;
+        background: var(--card-bg);
+        padding:25px;
+        border-radius:12px;
+        box-shadow:0 4px 6px -1px rgba(0,0,0,0.05);
+        border: 1px solid var(--border-color);
+        box-sizing: border-box;
+    }
 
-/* Modal Box Styling */
-.modal-box {
-    width: 600px;
-    max-width: 95%;
-    background: #ffffff;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0px 10px 25px rgba(0,0,0,0.2);
-    animation: fadeIn 0.25s ease-out;
-    border-top: 5px solid #2c3e50; /* Same as your store theme dark-blue */
-}
+    /* table */
+    .table-responsive { overflow-x: auto; width: 100%; }
+    table { width:100%; border-collapse:collapse; min-width: 900px; }
+    th, td { padding:15px 12px; border-bottom:1px solid var(--border-color); text-align:left; }
+    th { background: #f8fafc; color: var(--text-muted); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+    tr:hover td { background-color: #f8fafc; }
+    
+    .img-thumb { height:45px; width:45px; border-radius:6px; object-fit:cover; border:1px solid var(--border-color); display: block; }
+    
+    .price-tag { font-weight: 600; color: #10b981; }
 
-/* Modal Heading */
-.modal-box h3 {
-    margin-bottom: 20px;
-    font-size: 22px;
-    color: #2c3e50;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 8px;
-}
+    /* buttons */
+    .button { padding:8px 16px; background: var(--primary); color:#fff; border:none; border-radius:6px; text-decoration:none; cursor:pointer; font-size:14px; font-weight:500; transition:all 0.2s; display:inline-block; }
+    .button:hover { background: #3a0f3d; }
+    .button.secondary { background: linear-gradient(135deg, #11998e, #38ef7d); color: white; }
+    .button.secondary:hover { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(17,153,142,0.3); }
+    .button.danger { background: #ef4444; }
+    .button.danger:hover { background: #dc2626; }
+    .button.sm { padding: 6px 12px; font-size: 13px; margin-right: 5px; }
 
-/* Row & Columns */
-.modal-row {
-    display: flex;
-    gap: 25px;
-}
+    /* modals */
+    .modal-bg { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(15,23,42,0.6); display:none; justify-content:center; align-items:center; z-index:9999; backdrop-filter: blur(2px); }
+    .modal-box { width:700px; max-width:95%; max-height: 90vh; overflow-y:auto; background:#fff; padding:30px; border-radius:12px; box-shadow:0 10px 25px rgba(0,0,0,0.2); border-top: 5px solid var(--primary); animation: fadeIn 0.2s ease-out; }
+    .modal-box h3 { margin-top:0; margin-bottom: 25px; font-size: 22px; color: #0f172a; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+    
+    .modal-row { display:flex; gap:20px; }
+    .modal-col { flex:1; }
+    input[type="text"], input[type="number"], input[type="file"], textarea, select {
+        width:100%; padding:12px; border:1px solid #cbd5e1; border-radius:6px; font-size:14px; margin-top:5px; box-sizing: border-box; transition: border-color 0.2s; font-family: inherit;
+    }
+    input:focus, textarea:focus, select:focus { border-color: var(--primary); outline:none; box-shadow: 0 0 0 3px rgba(75, 19, 79, 0.1); }
+    label { font-weight:600; display:block; margin-top:15px; color: var(--text-dark); font-size: 14px; }
+    .small { font-size:12px; color:var(--text-muted); margin-top:5px; }
 
-.modal-col {
-    flex: 1;
-}
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
-/* Labels */
-.modal-col label {
-    font-weight: bold;
-    margin-top: 10px;
-    display: block;
-    color: #2c3e50;
-}
-
-/* Inputs */
-.modal-col input,
-.modal-col textarea,
-.modal-col select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    margin-top: 5px;
-    font-size: 15px;
-}
-
-/* Buttons */
-.modal-box .button {
-    background-color: #2c3e50;
-    color: white;
-    padding: 10px 18px;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    transition: 0.2s ease;
-}
-
-.modal-box .button:hover {
-    background-color: #3a4a5a;
-}
-
-.modal-box .danger {
-    background-color: #e74c3c;
-}
-
-.modal-box .danger:hover {
-    background-color: #c0392b;
-}
-
-/* Small text */
-.small {
-    font-size: 12px;
-    color: #666;
-}
-
-/* Animation */
-@keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
-}
-
+    /* responsive */
+    @media (max-width:880px){
+        .modal-row { flex-direction:column; gap:0; }
+        .navbar { flex-direction: column; gap: 15px; }
+        .page-header { flex-direction: column; align-items: flex-start; gap: 15px; }
+    }
 </style>
 
 <script>
@@ -381,65 +332,70 @@ function onEditCategoryChange() {
 </head>
 <body>
 
-<div class="top-bar">
-    <div class="store-name">PartsLo Admin</div>
-    <div>
-        <a href="/partslo/index.php">Home</a>
+<div class="navbar">
+    <a href="/partslo/admin/dashboard.php" class="brand">PartsLo Admin</a>
+    <div class="nav-links">
+        <a href="/partslo/index.php" target="_blank">View Store</a>
         <a href="/partslo/admin/dashboard.php">Dashboard</a>
-        <a href="/partslo/user/logout.php">Logout</a>
+        <a href="/partslo/admin/logout.php" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">Logout</a>
     </div>
 </div>
-<header>
-    <h1 style="text-align:center; margin-top:20px;">Manage Products</h1>
-</header>
 
 <div class="container">
+    <div class="page-header">
+        <h1>Manage Products</h1>
+        <button class="button secondary" onclick="openAddModal()">+ Add New Product</button>
+    </div>
+
     <div class="table-box">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-            <h2 style="margin:0">Products</h2>
-            <div>
-                <button class="button secondary" onclick="openAddModal()">+ Add Product</button>
-            </div>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Product Details</th>
+                        <th>Category</th>
+                        <th>Subcategory</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                        <th>Image</th>
+                        <th style="width: 140px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach($products as $p): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($p['id']) ?></td>
+                        <td>
+                            <strong style="color:var(--primary);"><?= htmlspecialchars($p['name']) ?></strong><br>
+                            <span style="font-size:12px; color:var(--text-muted);">SKU: <?= htmlspecialchars($p['sku']) ?></span>
+                        </td>
+                        <td><?= htmlspecialchars($p['category_name'] ?? '-') ?></td>
+                        <td><?= htmlspecialchars($p['subcategory_name'] ?? '-') ?></td>
+                        <td class="price-tag">Rs <?= number_format($p['price'],2) ?></td>
+                        <td>
+                            <?php if(intval($p['stock']) <= 5): ?>
+                                <span style="color: #ef4444; font-weight:600;"><?= intval($p['stock']) ?> (Low)</span>
+                            <?php else: ?>
+                                <?= intval($p['stock']) ?>
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <?php if (!empty($p['image']) && file_exists(__DIR__ . '/../assets/images/' . $p['image'])): ?>
+                                <img class="img-thumb" src="/partslo/assets/images/<?= htmlspecialchars($p['image']) ?>" alt="">
+                            <?php else: ?>
+                                <span class="small" style="font-style:italic;">No image</span>
+                            <?php endif; ?>
+                        </td>
+                        <td>
+                            <button class="button sm" onclick='openEditModal(<?= json_encode($p, JSON_HEX_TAG|JSON_HEX_APOS|JSON_HEX_AMP) ?>)'>Edit</button>
+                            <a class="button sm danger" href="products.php?delete=<?= intval($p['id']) ?>" onclick="return confirm('Delete this product?')">Del</a>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
         </div>
-
-        <table>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Product (SKU - Name)</th>
-                    <th>Category</th>
-                    <th>Subcategory</th>
-                    <th>Price</th>
-                    <th>Stock</th>
-                    <th>Image</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach($products as $p): ?>
-                <tr>
-                    <td><?= htmlspecialchars($p['id']) ?></td>
-                    <td><?= htmlspecialchars($p['sku']) ?> — <?= htmlspecialchars($p['name']) ?></td>
-                    <td><?= htmlspecialchars($p['category_name'] ?? '') ?></td>
-                    <td><?= htmlspecialchars($p['subcategory_name'] ?? '') ?></td>
-                    <td>Rs <?= number_format($p['price'],2) ?></td>
-                    <td><?= intval($p['stock']) ?></td>
-                    <td>
-                        <?php if (!empty($p['image']) && file_exists(__DIR__ . '/../assets/images/' . $p['image'])): ?>
-                            <img class="img-thumb" src="/partslo/assets/images/<?= htmlspecialchars($p['image']) ?>" alt="">
-                        <?php else: ?>
-                            <span class="small">No image</span>
-                        <?php endif; ?>
-                    </td>
-                    <td>
-                        <button class="button" onclick='openEditModal(<?= json_encode($p, JSON_HEX_TAG|JSON_HEX_APOS|JSON_HEX_AMP) ?>)'>Edit</button>
-                        <a class="button danger" href="products.php?delete=<?= intval($p['id']) ?>" onclick="return confirm('Delete this product?')">Delete</a>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-
     </div>
 </div>
 

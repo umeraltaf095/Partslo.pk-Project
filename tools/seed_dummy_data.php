@@ -1,5 +1,8 @@
 <?php
-// seed_dummy_data.php  -- run once
+// seed_dummy_data.php  -- DISABLED to protect production data
+// To re-enable, remove or comment out the die() line below.
+die('Seeder is disabled. Remove this line to run the seeder manually.');
+
 require_once __DIR__ . '/../includes/db_connect.php';
 
 // categories and their subcategories
