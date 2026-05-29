@@ -105,7 +105,7 @@ if (isset($_GET['delete'])) {
         if (!empty($row['image']) && file_exists($uploadDir . $row['image'])) {
             @unlink($uploadDir . $row['image']);
         }
-        $del = $pdo->prepare("DELETE FROM products WHERE id = ?");
+        $del = $pdo->prepare("UPDATE products SET is_active = 0 WHERE id = ?");
         $del->execute([$id]);
     }
     header("Location: products.php");
@@ -118,6 +118,7 @@ $productsStmt = $pdo->query("
     FROM products p
     LEFT JOIN categories c ON p.category_id = c.id
     LEFT JOIN subcategories s ON p.subcategory_id = s.id
+    WHERE p.is_active = 1
     ORDER BY p.id DESC
 ");
 $products = $productsStmt->fetchAll(PDO::FETCH_ASSOC);
