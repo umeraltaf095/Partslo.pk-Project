@@ -335,21 +335,12 @@ function addExistingSubRow(subId, subName) {
 </head>
 <body>
 
-<<<<<<< HEAD
 <div class="navbar">
-    <a href="/partslo/admin/dashboard.php" class="brand">PartsLo Admin</a>
+    <a href="/partslo/admin/dashboard.php" class="brand">⚙️ PartsLo Admin</a>
     <div class="nav-links">
         <a href="/partslo/index.php" target="_blank">View Store</a>
         <a href="/partslo/admin/dashboard.php">Dashboard</a>
         <a href="/partslo/admin/logout.php" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">Logout</a>
-=======
-    <div class="links">
-        Welcome, <?= htmlspecialchars($_SESSION['admin_name']) ?>
-        
-        <a href="/partslo/index.php">Home</a>
-        <a href="/partslo/admin/dashboard.php">Dashboard</a>
-        <a href="/partslo/user/logout.php">Logout</a>
->>>>>>> c8fb64247b165071eb4eb25e0e071a761c67454f
     </div>
 </div>
 

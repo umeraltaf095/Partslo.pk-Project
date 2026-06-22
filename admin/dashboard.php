@@ -42,6 +42,8 @@ $recent_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
             --border-color: #e2e8f0;
         }
 
+        * { box-sizing: border-box; }
+
         body {
             margin: 0;
             padding: 0;
@@ -50,6 +52,7 @@ $recent_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
             color: var(--text-dark);
         }
 
+        /* ── Navbar ── */
         .navbar {
             background: #1e293b;
             padding: 15px 30px;
@@ -61,7 +64,7 @@ $recent_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         .navbar .brand {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 700;
             color: #fff;
             text-decoration: none;
@@ -74,13 +77,13 @@ $recent_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         .navbar .nav-links {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 12px;
         }
 
         .navbar .nav-links span {
             color: #cbd5e1;
             font-weight: 500;
-            font-size: 15px;
+            font-size: 14px;
         }
 
         .navbar .nav-links a {
@@ -94,14 +97,15 @@ $recent_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
             transition: background 0.3s;
         }
 
-        .navbar .nav-links a:hover {
-            background: rgba(255,255,255,0.2);
-        }
+        .navbar .nav-links a:hover { background: rgba(255,255,255,0.2); }
+        .navbar .nav-links a.logout { background: rgba(239, 68, 68, 0.2); color: #fca5a5; }
+        .navbar .nav-links a.logout:hover { background: rgba(239, 68, 68, 0.35); }
 
+        /* ── Layout ── */
         .dashboard-container {
             max-width: 1400px;
             margin: 40px auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
 
         .page-header {
@@ -109,35 +113,41 @@ $recent_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         .page-header h1 {
-            font-size: 32px;
+            font-size: 30px;
             margin: 0;
             color: #0f172a;
+            font-weight: 700;
+        }
+
+        .page-header p {
+            margin: 6px 0 0;
+            color: var(--text-muted);
+            font-size: 15px;
         }
 
         .dashboard-grid {
             display: grid;
-            grid-template-columns: 260px 1fr;
-            gap: 30px;
+            grid-template-columns: 240px 1fr;
+            gap: 28px;
         }
 
-        /* Sidebar Navigation */
+        /* ── Sidebar ── */
         .sidebar {
             background: var(--card-bg);
             border-radius: 12px;
             padding: 20px 0;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
             border: 1px solid var(--border-color);
             align-self: start;
         }
 
         .sidebar h3 {
             padding: 0 20px;
-            margin-top: 0;
-            margin-bottom: 15px;
-            font-size: 13px;
+            margin: 0 0 12px 0;
+            font-size: 11px;
             text-transform: uppercase;
             color: var(--text-muted);
-            letter-spacing: 1px;
+            letter-spacing: 1.2px;
             font-weight: 600;
         }
 
@@ -149,78 +159,92 @@ $recent_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         .sidebar ul li a {
             display: block;
-            padding: 14px 20px;
+            padding: 12px 20px;
             color: var(--text-dark);
             text-decoration: none;
             font-weight: 500;
-            font-size: 15px;
+            font-size: 14px;
             transition: all 0.2s;
-            border-left: 4px solid transparent;
+            border-left: 3px solid transparent;
         }
 
-        .sidebar ul li a.active, .sidebar ul li a:hover {
+        .sidebar ul li a.active,
+        .sidebar ul li a:hover {
             background: #f1f5f9;
             color: var(--primary);
             border-left-color: var(--primary);
         }
 
-        /* Main Content */
+        /* ── Main Content ── */
         .main-content {
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 28px;
         }
 
+        /* ── Stat Cards ── */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
             gap: 20px;
         }
 
         .stat-card {
             background: var(--card-bg);
-            padding: 25px;
+            padding: 24px 20px;
             border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
             border: 1px solid var(--border-color);
             position: relative;
             overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.1);
         }
 
         .stat-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
+            top: 0; left: 0;
+            width: 100%; height: 4px;
             background: linear-gradient(90deg, var(--primary), var(--secondary));
         }
 
+        .stat-card.blue::before   { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+        .stat-card.purple::before { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
+        .stat-card.green::before  { background: linear-gradient(90deg, #10b981, #34d399); }
+        .stat-card.yellow::before { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+
+        .stat-card .stat-icon {
+            font-size: 28px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
         .stat-card h3 {
-            margin: 0 0 10px 0;
-            font-size: 36px;
+            margin: 0 0 6px 0;
+            font-size: 38px;
+            font-weight: 700;
             color: #0f172a;
+            line-height: 1;
         }
 
         .stat-card p {
             margin: 0;
             color: var(--text-muted);
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 500;
         }
 
-        /* Specific Colors for Stat Cards */
-        .stat-card.blue::before { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
-        .stat-card.green::before { background: linear-gradient(90deg, #10b981, #34d399); }
-        .stat-card.yellow::before { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
-        .stat-card.purple::before { background: linear-gradient(90deg, #8b5cf6, #a78bfa); }
-
+        /* ── Content Card ── */
         .content-card {
             background: var(--card-bg);
             border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
             border: 1px solid var(--border-color);
         }
 
@@ -235,33 +259,32 @@ $recent_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         .content-card-header h2 {
             margin: 0;
-            font-size: 20px;
+            font-size: 18px;
             color: #0f172a;
+            font-weight: 600;
         }
 
         .content-card-header a {
             color: var(--primary);
             text-decoration: none;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
+            transition: color 0.2s;
         }
 
-        .content-card-header a:hover {
-            text-decoration: underline;
-        }
+        .content-card-header a:hover { text-decoration: underline; }
 
-        /* Table */
-        .table-responsive {
-            overflow-x: auto;
-        }
+        /* ── Table ── */
+        .table-responsive { overflow-x: auto; }
 
         .data-table {
             width: 100%;
             border-collapse: collapse;
         }
 
-        .data-table th, .data-table td {
-            padding: 15px;
+        .data-table th,
+        .data-table td {
+            padding: 14px 12px;
             text-align: left;
             border-bottom: 1px solid var(--border-color);
         }
@@ -270,23 +293,18 @@ $recent_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
             background-color: #f8fafc;
             color: var(--text-muted);
             font-weight: 600;
-            font-size: 13px;
+            font-size: 12px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.6px;
         }
 
         .data-table td {
-            font-size: 15px;
+            font-size: 14px;
             color: var(--text-dark);
         }
 
-        .data-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .data-table tr:hover td {
-            background-color: #f8fafc;
-        }
+        .data-table tr:last-child td { border-bottom: none; }
+        .data-table tr:hover td { background-color: #f8fafc; }
 
         .product-cell {
             display: flex;
@@ -295,11 +313,17 @@ $recent_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         .product-img {
-            width: 40px;
-            height: 40px;
-            border-radius: 6px;
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
             object-fit: cover;
             border: 1px solid var(--border-color);
+            background: #f1f5f9;
+        }
+
+        .product-name {
+            font-weight: 500;
+            color: #0f172a;
         }
 
         .price-tag {
@@ -307,43 +331,51 @@ $recent_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
             color: #10b981;
         }
 
+        .stock-badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .stock-badge.low  { background: #fee2e2; color: #dc2626; }
+        .stock-badge.mid  { background: #fef3c7; color: #d97706; }
+        .stock-badge.high { background: #dcfce7; color: #16a34a; }
+
+        /* ── Responsive ── */
         @media (max-width: 900px) {
-            .dashboard-grid {
-                grid-template-columns: 1fr;
-            }
+            .dashboard-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 600px) {
+            .navbar { flex-direction: column; gap: 12px; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
         }
     </style>
 </head>
 <body>
 
-<<<<<<< HEAD
+<!-- ── Navbar ── -->
 <div class="navbar">
-    <a href="/partslo/admin/dashboard.php" class="brand">PartsLo Admin</a>
+    <a href="/partslo/admin/dashboard.php" class="brand">⚙️ PartsLo Admin</a>
     <div class="nav-links">
         <span>Hello, <?= htmlspecialchars($_SESSION['admin_name']) ?></span>
         <a href="/partslo/index.php" target="_blank">View Store</a>
-        <a href="/partslo/admin/logout.php" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5;">Logout</a>
-=======
-<!-- ⭐ HEADER / TOP BAR ⭐ -->
-<div class="top-bar">
-    <div class="store-name">PartsLo.pk</div>
-
-    <div class="links">
-        Welcome, <?= htmlspecialchars($_SESSION['admin_name']) ?>
-          <a href="/partslo/index.php">Home</a>
-        <a href="/partslo/admin/logout.php">Logout</a>
->>>>>>> c8fb64247b165071eb4eb25e0e071a761c67454f
+        <a href="/partslo/admin/logout.php" class="logout">Logout</a>
     </div>
 </div>
 
+<!-- ── Main Layout ── -->
 <div class="dashboard-container">
     <div class="page-header">
         <h1>Dashboard Overview</h1>
+        <p>Welcome back, <?= htmlspecialchars($_SESSION['admin_name']) ?>. Here's what's happening today.</p>
     </div>
 
     <div class="dashboard-grid">
-        
-        <!-- Sidebar Navigation -->
+
+        <!-- ── Sidebar ── -->
         <div class="sidebar">
             <h3>Manage Website</h3>
             <ul>
@@ -351,28 +383,32 @@ $recent_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <li><a href="/partslo/admin/products.php">Manage Products</a></li>
                 <li><a href="/partslo/admin/categories.php">Manage Categories</a></li>
                 <li><a href="/partslo/admin/orders.php">Manage Orders</a></li>
-                <li><a href="/partslo/admin/reports.php">Reports & Analytics</a></li>
+                <li><a href="/partslo/admin/reports.php">Reports &amp; Analytics</a></li>
             </ul>
         </div>
 
-        <!-- Main Content Area -->
+        <!-- ── Main Content ── -->
         <div class="main-content">
-            
+
             <!-- Statistics Cards -->
             <div class="stats-grid">
                 <div class="stat-card blue">
+                    <span class="stat-icon">📦</span>
                     <h3><?= $total_products ?></h3>
                     <p>Total Products</p>
                 </div>
                 <div class="stat-card purple">
+                    <span class="stat-icon">🗂️</span>
                     <h3><?= $total_categories ?></h3>
                     <p>Total Categories</p>
                 </div>
                 <div class="stat-card green">
+                    <span class="stat-icon">✅</span>
                     <h3><?= $completed_orders ?></h3>
                     <p>Completed Orders</p>
                 </div>
                 <div class="stat-card yellow">
+                    <span class="stat-icon">⏳</span>
                     <h3><?= $pending_orders ?></h3>
                     <p>Pending Orders</p>
                 </div>
@@ -384,9 +420,9 @@ $recent_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <h2>Recently Added Products</h2>
                     <a href="/partslo/admin/products.php">View All Products →</a>
                 </div>
-                
+
                 <?php if (empty($recent_products)): ?>
-                    <p style="color: var(--text-muted); text-align: center; padding: 20px 0;">No products found.</p>
+                    <p style="color: var(--text-muted); text-align: center; padding: 30px 0;">No products found.</p>
                 <?php else: ?>
                     <div class="table-responsive">
                         <table class="data-table">
@@ -400,16 +436,22 @@ $recent_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             </thead>
                             <tbody>
                                 <?php foreach ($recent_products as $p): ?>
+                                    <?php
+                                        $stock = intval($p['stock']);
+                                        $stockClass = $stock <= 5 ? 'low' : ($stock <= 15 ? 'mid' : 'high');
+                                    ?>
                                     <tr>
                                         <td>
                                             <div class="product-cell">
-                                                <img src="/partslo/assets/images/<?= htmlspecialchars($p['image']) ?>" alt="" class="product-img">
-                                                <span><?= htmlspecialchars($p['name']) ?></span>
+                                                <img src="/partslo/assets/images/<?= htmlspecialchars($p['image']) ?>"
+                                                     alt="" class="product-img"
+                                                     onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2242%22 height=%2242%22><rect fill=%22%23e2e8f0%22 width=%2242%22 height=%2242%22/></svg>'">
+                                                <span class="product-name"><?= htmlspecialchars($p['name']) ?></span>
                                             </div>
                                         </td>
                                         <td><?= htmlspecialchars($p['category_id']) ?></td>
                                         <td class="price-tag">Rs <?= number_format($p['price'], 2) ?></td>
-                                        <td><?= intval($p['stock']) ?></td>
+                                        <td><span class="stock-badge <?= $stockClass ?>"><?= $stock ?></span></td>
                                     </tr>
                                 <?php endforeach; ?>
                             </tbody>
@@ -418,10 +460,9 @@ $recent_products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <?php endif; ?>
             </div>
 
-        </div>
-
-    </div>
-</div>
+        </div><!-- /.main-content -->
+    </div><!-- /.dashboard-grid -->
+</div><!-- /.dashboard-container -->
 
 </body>
 </html>
